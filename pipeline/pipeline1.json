@@ -17,7 +17,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "Select max(watermarkvalue) as oldwatermarkvlue from dbo.watermark where tablename='sales'",
+						"sqlReaderQuery": "Select max(watermarkvalue) as oldwatermarkvalue from dbo.watermark1 where tablename='sales1'",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -42,7 +42,7 @@
 				"typeProperties": {
 					"source": {
 						"type": "AzureSqlSource",
-						"sqlReaderQuery": "Select max(salesdate) as newwatermarkvalue from [dbo].[sales]",
+						"sqlReaderQuery": "Select max(salesdate) as newwatermarkvalue from [dbo].[sales1]",
 						"queryTimeout": "02:00:00",
 						"partitionOption": "None"
 					},
@@ -81,7 +81,7 @@
 					"source": {
 						"type": "AzureSqlSource",
 						"sqlReaderQuery": {
-							"value": "Select * from sales where salesdate> '@{activity('Lookup1').output.firtsrow.oldwatermarkvalue}' and salesdate<='@{activity('Lookup2').output.firstrow.newwatermarkvalue}'\n",
+							"value": "select * from sales1 where salesdate> '@{activity('Lookup1').output.firstRow.oldwatermarkvalue}' and salesdate <= '@{activity('Lookup2').output.firstRow.newwatermarkvalue}'",
 							"type": "Expression"
 						},
 						"queryTimeout": "02:00:00",
@@ -141,11 +141,11 @@
 				},
 				"userProperties": [],
 				"typeProperties": {
-					"storedProcedureName": "[dbo].[updt_watermark]",
+					"storedProcedureName": "[dbo].[updt_watermark1]",
 					"storedProcedureParameters": {
 						"LastModifiedDate": {
 							"value": {
-								"value": "@{activity('Lookup2').output.firstrow.Lookup2}'",
+								"value": "@{activity('Lookup2').output.firstRow.newwatermarkvalue}'",
 								"type": "Expression"
 							},
 							"type": "DateTime"
