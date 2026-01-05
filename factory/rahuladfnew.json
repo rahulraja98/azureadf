@@ -1,0 +1,9 @@
+{
+	"name": "rahuladfnew",
+	"location": "centralindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "135a8659-148f-4028-84a0-a66863c24746",
+		"tenantId": "36edfcd8-6449-4be3-b5f0-0aef6e3969ff"
+	}
+}
